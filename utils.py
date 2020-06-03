@@ -1,0 +1,23 @@
+import time
+from contextlib import contextmanager
+from typing import List
+
+
+def read_path(file_path: str, splitter: str) -> List[str]:
+    with open(file_path, 'r') as f:
+        return f.read().split(splitter)
+
+
+def read_path_lines(file_path: str) -> List[str]:
+    return read_path(file_path, '\n')
+
+
+def read_path_csv(file_path: str) -> List[str]:
+    return read_path(file_path, ',')
+
+
+@contextmanager
+def localtimer():
+    start = time.perf_counter()
+    yield
+    print('func took', time.perf_counter() - start)
