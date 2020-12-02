@@ -4,7 +4,7 @@ from utils import read_path_lines, localtimer
 
 DATA_DIR = './'
 
-__author__ = 'patrickbrady-xaxis'
+__author__ = 'patrickcbrady'
 
 
 def get_summands(num_list: List[int], goal_value: int, num_summands: int = 2) -> Tuple[int, ...]:
