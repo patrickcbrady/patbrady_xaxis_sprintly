@@ -5,7 +5,7 @@ from utils import read_path_lines, localtimer
 
 __author__ = 'patrickcbrady'
 
-DATA_DIR = './'
+DATA_DIR = './inputs/'
 
 
 def parse_row(row: str) -> Tuple[int, int, str, str]:
@@ -55,8 +55,7 @@ def part2(rows: List[str]):
 
 
 def __main():
-    # rows = read_path_lines(f'{DATA_DIR}test_input')
-    rows = read_path_lines(f'{DATA_DIR}input')
+    rows = read_path_lines(f'{DATA_DIR}day2')
     part1(rows)
     part2(rows)
 

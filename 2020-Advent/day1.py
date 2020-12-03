@@ -2,7 +2,7 @@ from typing import List, Tuple, Optional
 
 from utils import read_path_lines, localtimer
 
-DATA_DIR = './'
+DATA_DIR = './inputs/'
 
 __author__ = 'patrickcbrady'
 
@@ -110,7 +110,7 @@ def part2(num_list: List[int], goal_value: int):
 
 
 def __main():
-    num_list = list(map(int, read_path_lines(f'{DATA_DIR}input')))
+    num_list = list(map(int, read_path_lines(f'{DATA_DIR}day1')))
     goal_value = 2020
     part1(num_list, goal_value)
     part2(num_list, goal_value)
