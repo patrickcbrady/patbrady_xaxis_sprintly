@@ -16,11 +16,11 @@ class SlopeMap(NamedTuple):
             return cls(f.read().split('\n'))
 
     @property
-    def h_bound(self):
+    def h_bound(self) -> int:
         return len(self.slope_map[0])
 
     @property
-    def v_bound(self):
+    def v_bound(self) -> int:
         return len(self.slope_map)
 
     def draw_map_divider(self):
@@ -33,7 +33,7 @@ class SlopeMap(NamedTuple):
         row = self.slope_map[v]
         print(''.join((row[:h], row[h].replace('.', 'O').replace('#', 'X'), row[h:][1:])))
 
-    def trees_on_slope(self, h: int, v: int, draw: bool = False):
+    def trees_on_slope(self, h: int, v: int, draw: bool = False) -> int:
         y = v
         x = h
         trees = 0
