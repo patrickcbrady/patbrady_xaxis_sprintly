@@ -3,6 +3,8 @@ from typing import List, Callable, Tuple
 
 from utils import read_path_lines, localtimer
 
+__author__ = 'patrickcbrady'
+
 DATA_DIR = './'
 
 
