@@ -46,7 +46,7 @@ def part1(bc: BagContainer):
             return True
         return any(can_contain(k, contents_color) for k in bc.bags[container_color])
 
-    print(len([b for b in bc.bags.keys() if can_contain(b, 'shiny gold')]))
+    print(sum((1 for b in bc.bags.keys() if can_contain(b, 'shiny gold'))))
 
 
 def part2(bc: BagContainer):
@@ -55,7 +55,7 @@ def part2(bc: BagContainer):
         if bc.bags[container_color] == {}:
             return 0
         else:
-            return sum([v + (bag_total(k) * v) for k, v in bc.bags[container_color].items()])
+            return sum((v + (bag_total(k) * v) for k, v in bc.bags[container_color].items()))
     print(bag_total('shiny gold'))
 
 
