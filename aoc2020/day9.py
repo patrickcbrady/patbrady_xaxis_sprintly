@@ -1,11 +1,14 @@
-from typing import List
+from typing import List, Set
 
 from dataclasses import dataclass
 
 import utils as U
-from aoc2020.day1 import get_summands
 
 DATA_DIR = './inputs/'
+
+
+def _can_sum(pool: Set[int], target: int) -> bool:
+    return any((target - p in pool) for p in pool if (target - p != p))
 
 
 @dataclass
@@ -14,14 +17,18 @@ class XmasData:
     preamble_len: int = 25
 
     def find_first_invalid(self):
-        i = self.preamble_len
+        i = 0
+        j = self.preamble_len
+        preamble = set(self.nums[i:j])
         try:
             while True:
-                n = self.nums[i]
-                preamble = self.nums[i - self.preamble_len:i]
-                if get_summands(preamble, n) is None:
+                n = self.nums[j]
+                if not _can_sum(preamble, n):
                     return n
+                preamble.remove(self.nums[i])
                 i += 1
+                preamble.add(self.nums[j])
+                j += 1
         except IndexError:
             print('woops!')
 
