@@ -1,4 +1,3 @@
-from collections import deque
 from typing import List
 
 from dataclasses import dataclass
@@ -32,15 +31,18 @@ class XmasData:
         return the sum of the smallest and largest numbers in that range
         """
         i = 0
-        queue = deque()
+        j = 1
+        range_sum = self.nums[i] + self.nums[j]
         try:
-            while True:
-                queue.append(self.nums[i])
-                while sum(queue) > weakness:
-                    queue.popleft()
-                if len(queue) > 1 and sum(queue) == weakness:
-                    return max(queue) + min(queue)
-                i += 1
+            while range_sum != weakness:
+                if range_sum < weakness:
+                    j += 1
+                    range_sum += self.nums[j]
+                else:
+                    range_sum -= self.nums[i]
+                    i += 1
+            cr = self.nums[i: j + 1]
+            return min(cr) + max(cr)
         except IndexError:
             print('woops!')
 
@@ -55,7 +57,7 @@ def part2(xd: XmasData, weakness: int) -> int:
 
 def __main():
     data = list(map(int, U.read_path_lines(f'{DATA_DIR}day9')))
-    xd = XmasData(data, 25)
+    xd = XmasData(data)
     p1_res = part1(xd)
     print(p1_res)
     p2_res = part2(xd, p1_res)
