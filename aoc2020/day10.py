@@ -1,7 +1,7 @@
 from collections import defaultdict
 from typing import List
 
-from attr import dataclass
+from dataclasses import dataclass
 
 import utils as U
 
