@@ -31,6 +31,7 @@ class SeatArrangement:
         else:
             return sum(map(is_occupied, self.get_adjacent_seats(row, col)))
 
+    # trade memory for speed
     @lru_cache(maxsize=None)
     def get_adjacent_seats(self, row: int, col: int) -> List[Tuple[int, int]]:
         res = []
@@ -43,6 +44,7 @@ class SeatArrangement:
                         res.append((r, c))
         return res
 
+    # trade memory for speed
     @lru_cache(maxsize=None)
     def get_visible_seats(self, row: int, col: int) -> List[Tuple[int, int]]:
         res = []
@@ -54,6 +56,7 @@ class SeatArrangement:
                         res.append(seat_pos)
         return res
 
+    # here's where we really avoid duplicate work
     @lru_cache(maxsize=None)
     def get_visible_seat(self, row: int, col: int, direction: Tuple[int, int]) -> Optional[Tuple[int, int]]:
         v, h = direction
