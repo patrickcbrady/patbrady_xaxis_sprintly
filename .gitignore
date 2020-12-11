@@ -2,4 +2,4 @@ __pycache__
 *.pyc
 venv/
 .idea/
-2020-Advent/inputs/test
+aoc2020/inputs/test
