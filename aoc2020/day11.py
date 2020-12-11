@@ -26,34 +26,24 @@ class SeatArrangement:
             r, c = seat
             return self.rows[r][c] == '#'
 
-        if count_visible:
-            return sum(map(is_occupied, self.get_visible_seats(row, col)))
-        else:
-            return sum(map(is_occupied, self.get_adjacent_seats(row, col)))
+        return sum(map(is_occupied, self.get_seats_to_check(row, col, count_visible)))
 
     # trade memory for speed
     @lru_cache(maxsize=None)
-    def get_adjacent_seats(self, row: int, col: int) -> List[Tuple[int, int]]:
+    def get_seats_to_check(self, row: int, col: int, count_visible: bool) -> List[Tuple[int, int]]:
         res = []
         for v in range(-1, 2):
             for h in range(-1, 2):
                 if not (v == 0 and h == 0):
-                    r = row + v
-                    c = col + h
-                    if (0 <= r < self.v_size) and (0 <= c < self.h_size):
-                        res.append((r, c))
-        return res
-
-    # trade memory for speed
-    @lru_cache(maxsize=None)
-    def get_visible_seats(self, row: int, col: int) -> List[Tuple[int, int]]:
-        res = []
-        for v in range(-1, 2):
-            for h in range(-1, 2):
-                if not (v == 0 and h == 0):
-                    seat_pos = self.get_visible_seat(row, col, (v, h))
-                    if seat_pos is not None:
-                        res.append(seat_pos)
+                    if count_visible:
+                        seat_pos = self.get_visible_seat(row, col, (v, h))
+                        if seat_pos is not None:
+                            res.append(seat_pos)
+                    else:
+                        r = row + v
+                        c = col + h
+                        if (0 <= r < self.v_size) and (0 <= c < self.h_size):
+                            res.append((r, c))
         return res
 
     # here's where we really avoid duplicate work
