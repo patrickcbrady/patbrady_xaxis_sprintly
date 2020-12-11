@@ -1,5 +1,6 @@
 import copy
 from functools import lru_cache
+from itertools import product
 from typing import List, Tuple, Optional
 
 from dataclasses import dataclass
@@ -7,6 +8,8 @@ from dataclasses import dataclass
 import utils as U
 
 DATA_DIR = './inputs/'
+
+the_8_winds = frozenset((r, c) for r, c in product(range(-1, 2), range(-1, 2))) - {(0, 0)}
 
 
 @dataclass
@@ -32,18 +35,16 @@ class SeatArrangement:
     @lru_cache(maxsize=None)
     def get_seats_to_check(self, row: int, col: int, count_visible: bool) -> List[Tuple[int, int]]:
         res = []
-        for v in range(-1, 2):
-            for h in range(-1, 2):
-                if not (v == 0 and h == 0):
-                    if count_visible:
-                        seat_pos = self.get_visible_seat(row, col, (v, h))
-                        if seat_pos is not None:
-                            res.append(seat_pos)
-                    else:
-                        r = row + v
-                        c = col + h
-                        if (0 <= r < self.v_size) and (0 <= c < self.h_size):
-                            res.append((r, c))
+        for v, h in the_8_winds:
+            if count_visible:
+                seat_pos = self.get_visible_seat(row, col, (v, h))
+                if seat_pos is not None:
+                    res.append(seat_pos)
+            else:
+                r = row + v
+                c = col + h
+                if (0 <= r < self.v_size) and (0 <= c < self.h_size):
+                    res.append((r, c))
         return res
 
     # here's where we really avoid duplicate work
