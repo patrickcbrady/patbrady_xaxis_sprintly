@@ -98,20 +98,22 @@ class SeatArrangement:
 
 def part1(data: List[List[str]]):
     sa = SeatArrangement(data)
-    while True:
-        has_changed, seats_occupied = sa.apply_rules()
-        if not has_changed:
-            print(seats_occupied)
-            break
+    with U.localtimer():
+        while True:
+            has_changed, seats_occupied = sa.apply_rules()
+            if not has_changed:
+                break
+    print(seats_occupied)
 
 
 def part2(data: List[List[str]]):
     sa = SeatArrangement(data)
-    while True:
-        has_changed, seats_occupied = sa.apply_rules(check_visible=True, tolerance=5)
-        if not has_changed:
-            print(seats_occupied)
-            break
+    with U.localtimer():
+        while True:
+            has_changed, seats_occupied = sa.apply_rules(check_visible=True, tolerance=5)
+            if not has_changed:
+                break
+    print(seats_occupied)
 
 
 def __main():
