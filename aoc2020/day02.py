@@ -35,7 +35,7 @@ def is_valid_by_char_count(row: str) -> bool:
 def is_valid_by_pos(row: str) -> bool:
     """return True if char is at the 1-based position in pwd given by left or right, but not both"""
     left, right, char, pwd = parse_row(row)
-    return (pwd[left-1] == char) != (pwd[right-1] == char)
+    return (pwd[left - 1] == char) != (pwd[right - 1] == char)
 
 
 def count_valid(rows: List[str], validator: Callable) -> int:

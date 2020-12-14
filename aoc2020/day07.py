@@ -1,6 +1,7 @@
-import utils as U
 from functools import lru_cache
 from typing import List, NamedTuple, Dict
+
+import utils as U
 
 DATA_DIR = './inputs/'
 
@@ -37,7 +38,6 @@ class BagContainer(NamedTuple):
 
 
 def part1(bc: BagContainer):
-
     @lru_cache(maxsize=None)
     def can_contain(container_color: str, contents_color: str) -> bool:
         if bc.bags[container_color] == {}:
@@ -56,6 +56,7 @@ def part2(bc: BagContainer):
             return 0
         else:
             return sum((v + (bag_total(k) * v) for k, v in bc.bags[container_color].items()))
+
     print(bag_total('shiny gold'))
 
 

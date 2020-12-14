@@ -1,7 +1,7 @@
 from functools import reduce
+from typing import List
 
 import utils as U
-from typing import List
 
 DATA_DIR = './inputs/'
 

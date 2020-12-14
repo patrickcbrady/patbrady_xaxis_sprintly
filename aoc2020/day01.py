@@ -37,7 +37,7 @@ def get_summands(num_list: List[int], goal_value: int, num_summands: int = 2) ->
                 # don't bother recursing if the goal is impossible
                 # assumes all "expense report" entries must be positive
                 continue
-            res = get_summands(list(num_list), new_goal, num_summands-1)
+            res = get_summands(list(num_list), new_goal, num_summands - 1)
             if res is not None:
                 return (num,) + res
 

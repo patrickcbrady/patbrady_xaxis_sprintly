@@ -1,4 +1,4 @@
-from typing import List, Tuple, Dict
+from typing import List, Tuple
 
 from dataclasses import dataclass
 from frozendict import frozendict

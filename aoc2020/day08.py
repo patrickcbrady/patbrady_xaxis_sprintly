@@ -1,8 +1,8 @@
+from typing import List, Dict, Callable
+
 from dataclasses import dataclass
 
 import utils as U
-from typing import List, NamedTuple, Dict, Callable
-
 
 DATA_DIR = './inputs/'
 

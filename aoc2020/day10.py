@@ -36,7 +36,7 @@ class AdapterChain:
                 paths[n] = 1
             else:
                 # no. of paths to current node is sum of no. of paths to the nodes that can reach the current node
-                for m in range(n-3, n):
+                for m in range(n - 3, n):
                     if m in nums:
                         paths[n] += paths[m]
         return paths[nodes[-1]]
