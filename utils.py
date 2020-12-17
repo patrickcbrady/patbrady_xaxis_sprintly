@@ -16,6 +16,10 @@ def read_path_blank_lines(file_path: str) -> List[str]:
     return [s.replace('\n', ' ') for s in read_path(file_path, '\n\n')]
 
 
+def read_chunked_lines(file_path: str) -> List[str]:
+    return read_path(file_path, '\n\n')
+
+
 def read_path_csv(file_path: str) -> List[str]:
     return read_path(file_path, ',')
 
