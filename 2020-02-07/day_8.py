@@ -1,6 +1,8 @@
-from typing import NamedTuple, List, Dict, Tuple
 from collections import Counter, deque
-import utils.core.utils as U
+from typing import NamedTuple, List
+
+import utils as U
+
 DATA_DIR = './'
 
 
@@ -33,7 +35,6 @@ class ImageLayer(NamedTuple):
 class DSNImage(NamedTuple):
     layers: List[ImageLayer]
 
-    @U.timer
     def flatten(self) -> ImageLayer:
         first_layer = self.layers[0]
         width = first_layer.width
@@ -68,8 +69,8 @@ class DSNDecoder:
 
     def decode_image(self, image: str) -> DSNImage:
         img_len = len(image)
-        return DSNImage([ImageLayer(image[i:i+self.width*self.height], self.width, self.height)
-                         for i in range(0, img_len, self.width*self.height)])
+        return DSNImage([ImageLayer(image[i:i + self.width * self.height], self.width, self.height)
+                         for i in range(0, img_len, self.width * self.height)])
 
 
 def test_part_1():
