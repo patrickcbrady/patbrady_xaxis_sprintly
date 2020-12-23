@@ -3,6 +3,11 @@ from contextlib import contextmanager
 from typing import List, Tuple
 
 
+def read_whole_file(file_path: str) -> str:
+    with open(file_path, 'r') as f:
+        return f.read()
+
+
 def read_path(file_path: str, splitter: str) -> List[str]:
     with open(file_path, 'r') as f:
         return f.read().split(splitter)
