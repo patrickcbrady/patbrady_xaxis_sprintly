@@ -1,6 +1,6 @@
 import time
 from contextlib import contextmanager
-from typing import List
+from typing import List, Tuple
 
 
 def read_path(file_path: str, splitter: str) -> List[str]:
