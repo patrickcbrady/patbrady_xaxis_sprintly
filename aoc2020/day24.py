@@ -1,4 +1,3 @@
-from copy import deepcopy
 from typing import List, Dict
 
 from dataclasses import dataclass
@@ -56,37 +55,20 @@ def navigate_line(line: str) -> Point:
     return point
 
 
-def color(i: int) -> str:
-    if i == 1:
-        return 'white'
-    if i == 0:
-        return 'black'
-    return 'WHAT!?'
-
-
 def part1(lines: List[str]) -> Dict[Point, int]:
-    points_found = {Point(0, 0): 1}
-    for line in lines:
-        end_point = navigate_line(line)
-        if points_found.get(end_point) is not None:
-            points_found[end_point] = points_found[end_point] ^ 1
-        else:
-            points_found[end_point] = 0
-    # for p, c in points_found.items():
-    #     print(f'{p}: {color(c)}')
+    points_found = {}
+    with U.localtimer():
+        for line in lines:
+            end_point = navigate_line(line)
+            if points_found.get(end_point) is not None:
+                points_found[end_point] = points_found[end_point] ^ 1
+            else:
+                points_found[end_point] = 0
     print(sum(1 for v in points_found.values() if v == 0))
     return points_found
 
 
 def part2(tile_dict: Dict[Point, int], days: int):
-
-    def count_live_neighbors(p: Point):
-        count = 0
-        for neighbor in p.get_neighbors():
-            if tile_dict.get(neighbor) is not None and tile_dict[neighbor] == 0:
-                count += 1
-        return count
-
     with U.localtimer():
         for day in range(1, days + 1):
             new_dict = {}
@@ -97,7 +79,7 @@ def part2(tile_dict: Dict[Point, int], days: int):
                     if n in seen_today:
                         continue
                     curr_color = 1 if tile_dict.get(n) is None else tile_dict[n]
-                    live_neighbors = count_live_neighbors(n)
+                    live_neighbors = sum(tile_dict.get(neighbor) == 0 for neighbor in n.get_neighbors())
                     if (curr_color == 1 and live_neighbors == 2) or (curr_color == 0 and (0 < live_neighbors < 3)):
                         new_dict[n] = 0
                     seen_today.add(n)
